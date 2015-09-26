@@ -12,7 +12,7 @@ cachemean <- function(x, ...) {
 
 makeVector <- function(x = numeric()) {
     
-    m <<- NULL
+    m <- NULL
     set <- function(y) {
         x <<- y
         m <<- NULL
