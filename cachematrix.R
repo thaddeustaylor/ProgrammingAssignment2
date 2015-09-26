@@ -61,19 +61,34 @@ makeCacheMatrix <- function(x = matrix()) {
 ##Solves for the inverse of the matrix, unless it exists already then
 ## it will return the cached copy.
 ##
+## This uses the solve function internally.
+##
 ## Inputs: an object created by makeCacheMatrix
+##         any additional arguements are passed to solve() 
 ## Outputs: The inverse of the matrix stored in the object.
 ##
+## TODO: 
+##   - Add some error checking if the martix isn't invertable
+##   - check that the object in the function list is indeed a matrix
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
     m <- x$getinverse()
     
+    #Check if the inverse exists
     if(!is.null(m)) {
         message("getting cached data")
+        #If so return the cached version
         return(m)
     }
+    
+    #grab the matrix to invert
     data <- x$get()
+    #invert the matrix
     m <- solve(data, ...)
+    
+    #store the inverted matrix
     x$setinverse(m)
+    
+    #return the inverted matrix
     m
 }
